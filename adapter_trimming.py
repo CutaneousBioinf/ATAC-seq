@@ -15,7 +15,8 @@ def parse_file(filename):
 	#input: core_info_file
 	#output: patient ID and description(cell type etc)
 	core_info=pd.read_table(filename)
-	tmp=core_info[core_info['Lane']==1]
+	#tmp=core_info[core_info['Lane']==1]
+	tmp=core_info.groupby(['Lane']).get_group(1)
 	tmp=tmp.drop(tmp.index[len(tmp)-1])
 
 	#patient ID
