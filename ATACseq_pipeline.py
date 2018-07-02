@@ -59,7 +59,7 @@ def generate_template():
 	file.write('chr_sizes=/net/fantasia/home/alextsoi/db/UCSC/hg19.chrom.sizes_nochr\n')
 	file.close()
 
-	file=open('congif_file_gotcloud_template','a')
+	file=open('config_file_gotcloud_template','a')
 	file.write('#BATCH_TYPE = mosix\n')
 	file.write('#BATCH_OPTS = -j21,22,23,24,30\n')
 	file.write('REF_DIR = /data/local/ref/gotcloud.ref\n')
@@ -298,8 +298,9 @@ if len(func_call)==0:
 				os.makedirs(entire_output+'/QCs/InsertSize/Batch'+batch+'_Run'+run)
 			out_plot=entire_output+'/QCs/InsertSize/Batch'+batch+'_Run'+run
 
-		os.system('Rscript insertsizehist.R '+in_bam+' '+out_plot+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run+'.pdf')
-		os.system('Rscript insertsizehist.R '+in_bam_filtered+' '+out_plot+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run+'.pdf')
+		cur_ptw=os.path.dirname(os.path.realpath(__file__))
+		os.system('Rscript '+cur_ptw+'/insertsizehist.R '+in_bam+' '+out_plot+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run+'.pdf')
+		os.system('Rscript '+cur_ptw+'/insertsizehist.R '+in_bam_filtered+' '+out_plot+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run+'.pdf')
 
 		#get genome_coverage
 		if ('specific_output' in commands) and ('out_coverage' in spec_out):

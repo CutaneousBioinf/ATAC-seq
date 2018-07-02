@@ -24,7 +24,8 @@ def generate_metabam(pathway):
 	return(file)
 
 def generate_metatable(metabam,output_table):
-	os.system('python depth_of_coverage.py '+metabam+' '+output_table)
+	cur_ptw=entire_output=os.path.dirname(os.path.realpath(__file__))
+	os.system('python '+cur_ptw+'/depth_of_coverage.py '+metabam+' '+output_table)
 
 def concat_func(command):
 	pathway=command[0]

@@ -39,7 +39,8 @@ def generate_signal_to_noise(core_info,outdir,dir_clus):
 	#input: core_info file generated in the previous step
 	#input: output directory to store the generated pdf file
 	#input: pathway to dir_clus file
-	os.system('Rscript signal_to_noise.R '+core_info+' '+outdir+' '+dir_clus)
+	cur_ptw=os.path.dirname(os.path.realpath(__file__))
+	os.system('Rscript '+cur_ptw+'/signal_to_noise.R '+core_info+' '+outdir+' '+dir_clus)
 
 def concat_func(command):
 	bedprofile=command[0]
