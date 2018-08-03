@@ -1,6 +1,6 @@
 # ATACseq_pipeline
 
-This is an automatic pipeline of processing ATAC-seq data. The pipeline will need the user to provide the raw ATACseq sequence data and will do the following steps including adapter-trimming, alignment, filtering, ploting chromosome pattern, getting the coverage depth, generating .bed filea, comparing signal to noise and summarizing all the previous stpes.
+This is an automatic pipeline of processing ATAC-seq data. The pipeline will need the user to provide the raw ATACseq sequence data and will do the following steps including adapter-trimming, alignment, filtering, plotting chromosome pattern, getting the coverage depth, generating .bed filea, comparing signal to noise and summarizing all the previous steps.
 
 ## Usage of the ATACseq_pipeline: 
 
