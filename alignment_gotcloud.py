@@ -92,7 +92,8 @@ def run_gotcloud(param):
 	conf=param[5]
 	print('Processing alignment of Sample_'+ele)
 	#(batch,run)=get_batch_run(pathway)
-	os.system('mkdir '+outdir+'/Sample_'+ele)
+	if not os.path.exists(outdir+'/Sample_'+ele):
+		os.system('mkdir '+outdir+'/Sample_'+ele)
 	os.system('gotcloud align --conf '+conf+' --outdir '+outdir+'/Sample_'+ele
 		+' --list '+index_pathway+'/fastq_Batch'+batch+'_Run'+run+'_index_'+ele)
 	print('Alignment of Sample_'+ele+'  done')
