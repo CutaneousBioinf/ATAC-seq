@@ -8,6 +8,7 @@ import re
 import sys
 import itertools
 import multiprocessing
+from pathlib import Path
 
 '''def get_batch_run(pathway):
 	#get the batch and run from the output directory
