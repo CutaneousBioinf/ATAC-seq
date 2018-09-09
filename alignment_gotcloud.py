@@ -107,11 +107,27 @@ def generate_meta_file(outdir,index_pathway,pathway,batch,run):
 			Flag=True
 			break
 	if Flag:
+		my_file = Path(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run)
+		if my_file.is_file():
+			print('Warning: metagotCloud files already exist, will rewrite over it.')
+
+		file=open(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
+		file.write('')
+		file.close()
+
 		file=open(index_pathway+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'a')
 		for ele in SampleID:
 			file.write(outdir+'/Sample_'+ele+'/bams/'+ele+'.recal.bam\n')
 		file.close()
 	else:
+		my_file = Path(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run)
+		if my_file.is_file():
+			print('Warning: metagotCloud files already exist, will rewrite over it.')
+
+		file=open(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
+		file.write('')
+		file.close()
+		
 		file=open(index_pathway+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'a')
 		for ele in SampleID:
 			file.write(outdir+'/bams/'+ele+'.recal.bam\n')

@@ -80,7 +80,7 @@ def proc_sum_gotCloud(param):
 def generate_meta_file(outdir,filename,batch,run):
 	my_file = Path(outdir+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run)
 	if my_file.is_file():
-		print('Warning: metagotCloud files already exist, will rewrite over it.')
+		print('Warning: metagotCloud filtered files already exist, will rewrite over it.')
 
 	file=open(outdir+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run,'w')
 	file.write('')
