@@ -15,7 +15,6 @@ import pandas as pd
 import itertools
 import multiprocessing
 import re
-from pathlib import Path
 
 '''if len(argv)!=4:
 	print("Usage:\tmetagotCloudbam\toutdir\toutputtable\tjob\n")
@@ -78,10 +77,6 @@ def proc_sum_gotCloud(param):
 	readcounts.to_csv(tempsample,index=None,sep='\t')
 
 def generate_meta_file(outdir,filename,batch,run):
-	my_file = Path(outdir+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run)
-	if my_file.is_file():
-		print('Warning: metagotCloud filtered files already exist, will rewrite over it.')
-
 	file=open(outdir+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run,'w')
 	file.write('')
 	file.close()

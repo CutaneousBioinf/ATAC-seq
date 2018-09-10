@@ -8,7 +8,6 @@ import re
 import sys
 import itertools
 import multiprocessing
-from pathlib import Path
 
 '''def get_batch_run(pathway):
 	#get the batch and run from the output directory
@@ -108,10 +107,6 @@ def generate_meta_file(outdir,index_pathway,pathway,batch,run):
 			Flag=True
 			break
 	if Flag:
-		my_file = Path(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run)
-		if my_file.is_file():
-			print('Warning: metagotCloud files already exist, will rewrite over it.')
-
 		file=open(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
 		file.write('')
 		file.close()
@@ -121,10 +116,6 @@ def generate_meta_file(outdir,index_pathway,pathway,batch,run):
 			file.write(outdir+'/Sample_'+ele+'/bams/'+ele+'.recal.bam\n')
 		file.close()
 	else:
-		my_file = Path(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run)
-		if my_file.is_file():
-			print('Warning: metagotCloud files already exist, will rewrite over it.')
-
 		file=open(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
 		file.write('')
 		file.close()
