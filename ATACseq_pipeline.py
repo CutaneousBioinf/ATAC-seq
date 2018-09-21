@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#Code contributed by Yuhua Zhang
+#This part of the code contributed by Yuhua Zhang
 
 import adapter_trimming
 import alignment_gotcloud
