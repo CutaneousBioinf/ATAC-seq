@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#Code contributed by Yuhua Zhang
+#This part of the pipeline was designed by Alex and implemented by Yuhua Zhang
 
 import sys
 import pandas as pd
