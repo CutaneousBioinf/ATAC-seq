@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#This part of the pipeline is structured by Alex Tsoi and implemented by Yuhua Zhang
+#This part of the pipeline was designed by Alex Tsoi and implemented by Yuhua Zhang
 
 import pandas as pd
 import os
