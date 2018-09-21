@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#This part of the code contributed by Yuhua Zhang
+#This part of the code concatenate different parts of the pipeline together, implemented by Yuhua Zhang
 
 import adapter_trimming
 import alignment_gotcloud
