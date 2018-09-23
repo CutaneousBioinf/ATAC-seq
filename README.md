@@ -2,7 +2,7 @@
 
 This is an automatic pipeline of processing ATAC-seq data. The pipeline will need the user to provide the raw ATACseq sequence data and will do the following steps including adapter-trimming, alignment, filtering, plotting chromosome pattern, getting the coverage depth, generating .bed filea, comparing signal to noise and summarizing all the previous steps.
 
-The pipeline was mainly designed by Alex Tsoi, and implemented by Yuhua Zhang. Also thanks to Matthew Patrick for sharing his suggestions.
+The pipeline was contributed by Yuhua Zhang and Alex Tsoi. Also thanks to Matthew Patrick for sharing his suggestions.
 
 ## Usage of the ATACseq_pipeline: 
 
