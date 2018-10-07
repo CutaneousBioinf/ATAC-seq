@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-#This part of the code concatenate different parts of the pipeline together, implemented by Yuhua Zhang
+#This part of the code concatenate all the rest part together, contributed by Yuhua Zhang
 
-import adapter_trimming
+import adapter_trimming_update
 import alignment_gotcloud
 import filtering
 import genome_coverage
@@ -213,15 +213,25 @@ if len(func_call)==0:
 		if 'job_AT' in commands:
 			job_AT=int(commands['job_AT'][0])
 		out_sampleinfo=entire_output+'/data'
+		trim_read=False
+		if 'trim_read' in commands:
+			if commands['trim_read'][0] in ['Yes']:
+				trim_read=True
+		reads=38
+		if 'reads' in commands:
+			reads=int(commands['reads'][0])
+		direct='l'
+		if 'direct' in commands:
+			direct=commands['direct'][0]
 		if not os.path.exists(out_sampleinfo):
 			os.makedirs(out_sampleinfo)
-		command=[seq_data,core_info_file,job_AT,out_sampleinfo]
+		command=[seq_data,core_info_file,job_AT,out_sampleinfo,trim_read,reads,direct]
 		if ('specific_output' in commands) & ('out_sampleinfo' in spec_out):
 			out_sampleinfo=spec_out['out_sampleinfo'][0]
 			if not os.path.exists(out_sampleinfo):
 				os.makedirs(out_sampleinfo)
-			command=[seq_data,core_info_file,job_AT,out_sampleinfo]
-		adapter_trimming.concat_func(command)
+			command=[seq_data,core_info_file,job_AT,out_sampleinfo,trim_read,reads,direct]
+		adapter_trimming_update.concat_func(command)
 		#print(command)
 
 		#alignment through gotcloud
@@ -401,10 +411,20 @@ elif ('adapter_trimming' in func_call):
 		if 'job_AT' in commands:
 			job_AT=int(commands['job_AT'][0])
 		out_sampleinfo=os.path.dirname(os.path.realpath(__file__))
+		trim_read=False
+		if 'trim_read' in commands:
+			if commands['trim_read'][0] in ['Yes']:
+				trim_read=True
+		reads=38
+		if 'reads' in commands:
+			reads=int(commands['reads'][0])
+		direct='l'
+		if 'direct' in commands:
+			direct=commands['direct'][0]
 		if 'out_sampleinfo' in commands:
 			out_sampleinfo=commands['out_sampleinfo'][0]
-		command=[seq_data,core_info_file,job,out_sampleinfo]
-		adapter_trimming.concat_func(command)
+		command=[seq_data,core_info_file,job,out_sampleinfo,trim_read,reads,direct]
+		adapter_trimming_update.concat_func(command)
 	else:
 		print('Please specify at least the --core_info_file --seq_data')
 
