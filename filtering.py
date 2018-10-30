@@ -74,7 +74,7 @@ def proc_sum_gotCloud(param):
 		os.system('rm '+outdir+'/'+tempsample+'.dedup.mapped.noMT.bam')
 		os.system('rm '+outdir+'/'+tempsample+'.dedup.mapped.noMT.clipped.bam')
 		os.system('rm '+outdir+'/'+tempsample+'.dedup.mapped.noMT.clipped.MQ.bam')
-	readcounts.to_csv(tempsample,index=None,sep='\t')
+	readcounts.to_csv(outdir+'/'+tempsample,index=None,sep='\t')
 
 def generate_meta_file(outdir,filename,batch,run):
 	file=open(outdir+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run,'w')
@@ -108,9 +108,9 @@ def concat_func(command):
 	outtable=pd.read_table(filename[0])
 	os.system('rm '+filename[0])
 	for ele in filename[1:]:
-		tmp=pd.read_table(ele)
+		tmp=pd.read_table(command[1]+'/'+ele)
 		outtable=pd.concat([outtable,tmp],axis=1)
-		os.system('rm '+ele)
+		os.system('rm '+command[1]+'/'+ele)
 	tmp={'ReadCount':['Raw','Mapped','PairProperlymapped','RemovedMito','Duplicate','MQ30','noGL']}
 	tmp=pd.DataFrame(data=tmp)
 	outtable=pd.concat([tmp,outtable],axis=1)
