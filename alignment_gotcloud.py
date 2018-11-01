@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#This part of the pipeline was designed by Alex Tsoi and implemented by Yuhua Zhang
+#Code contributed by Yuhua Zhang
 
 import pandas as pd
 import os
@@ -107,7 +107,7 @@ def generate_meta_file(outdir,index_pathway,pathway,batch,run):
 			Flag=True
 			break
 	if Flag:
-		file=open(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
+		file=open(index_pathway+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
 		file.write('')
 		file.close()
 
@@ -116,7 +116,7 @@ def generate_meta_file(outdir,index_pathway,pathway,batch,run):
 			file.write(outdir+'/Sample_'+ele+'/bams/'+ele+'.recal.bam\n')
 		file.close()
 	else:
-		file=open(outdir+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
+		file=open(index_pathway+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run,'w')
 		file.write('')
 		file.close()
 		
