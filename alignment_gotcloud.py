@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#Code contributed by Yuhua Zhang
+#Code contributed by Alex Tsoi and Yuhua Zhang
 
 import pandas as pd
 import os
