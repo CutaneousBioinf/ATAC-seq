@@ -105,8 +105,8 @@ def concat_func(command):
 	pool.map(proc_sum_gotCloud,paramlist)
 
 	# generate the output table
-	outtable=pd.read_table(filename[0])
-	os.system('rm '+filename[0])
+	outtable=pd.read_table(command[1]+'/'+filename[0])
+	os.system('rm '+command[1]+'/'+filename[0])
 	for ele in filename[1:]:
 		tmp=pd.read_table(command[1]+'/'+ele)
 		outtable=pd.concat([outtable,tmp],axis=1)
