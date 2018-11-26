@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#This part of the code concatenate all the rest part together, contributed by Yuhua Zhang
+#This part of the code concatenate all the rest part together and briefly check the running condition, contributed by Yuhua Zhang
 
 import adapter_trimming_update
 import alignment_gotcloud
@@ -13,6 +13,7 @@ import getopt
 import make_bed
 import signal_to_noise
 import summary
+import datetime
 
 '''if len(sys.argv)!=2:
 	print('Usage: python command.py config_file')
@@ -198,7 +199,7 @@ if len(func_call)==0:
 				tmp=ele.rstrip().split(' ')
 				spec_out[tmp[0]]=tmp[1:]
 		tmp_file.close()
-
+	
 	entire_output=os.path.dirname(os.path.realpath(__file__))
 	if 'entire_output' in commands:
 		entire_output=commands['entire_output'][0]
@@ -207,6 +208,19 @@ if len(func_call)==0:
 
 	#trim_adapter
 	if all(x in commands for x in ['core_info_file','seq_data','batch','run','conf','bedprofile']):
+		#=====================update data 11/2/2018==============================
+		batch=commands['batch'][0]
+		run=commands['run'][0]
+		summary_file=open('summary_file_Run_'+run+'_Batch'+batch+'.txt','w')
+		summary_file.write('Current time:')
+		summary_file.write(str(datetime.datetime.now()))
+		summary_file.write('\n')
+		summary_file.write('The ATACseq pipeline begins running...\n')
+		#=======================================================================
+
+		#=====================update data 11/2/2018==============================
+		summary_file.write('Now run the adapter trimming...\n')
+		#========================================================================
 		core_info_file=commands['core_info_file'][0]
 		seq_data=commands['seq_data'][0]
 		job_AT=9
@@ -233,6 +247,13 @@ if len(func_call)==0:
 			command=[seq_data,core_info_file,job_AT,out_sampleinfo,trim_read,reads,direct]
 		adapter_trimming_update.concat_func(command)
 		#print(command)
+		#======================updata data 11/2/2018==============================
+		summary_file.write('The adapter_trimming has been finished.\n')
+		summary_file.write('Current time:')
+		summary_file.write(str(datetime.datetime.now()))
+		summary_file.write('\n')
+		summary_file.write('Now begins the alignment...\n')
+		#======================================================================
 
 		#alignment through gotcloud
 		trimmed_file=seq_data
@@ -262,6 +283,15 @@ if len(func_call)==0:
 		alignment_gotcloud.concat_func(command)
 		#print(command)
 
+		#==========================update date 11/2/2018===========================
+		#check the alignment file
+		summary_file.write('The alignment has finished\n')
+		summary_file.write('Current time:')
+		summary_file.write(str(datetime.datetime.now()))
+		summary_file.write('\n')
+		summary_file.write('Now begins the filtering procedure...\n')
+		#=========================================================================
+
 		#filter the reads
 		in_bam=out_conf+'/metagotCloudbamfiles_Batch'+batch+'_Run'+run
 		job_filter=9
@@ -289,6 +319,15 @@ if len(func_call)==0:
 		command=[in_bam,out_proc_bam,job_filter,intermediate_file,batch,run]
 		filtering.concat_func(command)
 		#print(command)
+
+		#===============================update date 11/2/2018=====================
+		#check the filtering file
+		summary_file.write('Filtering has been finished\n')
+		summary_file.write('Current time:')
+		summary_file.write(str(datetime.datetime.now()))
+		summary_file.write('\n')
+		summary_file.write('Now begins the QC procedure...\n')
+		#=========================================================================
 
 		#plotting
 		in_bam_filtered=out_proc_bam+'/metagotCloudbamfiles_filtered_Batch'+batch+'_Run'+run
@@ -399,6 +438,51 @@ if len(func_call)==0:
 		command=[out_sampleinfo,out_proc_bam,out_coverage,out_s2n,batch,run,out_summary]
 		summary.concat_func(command)
 		#print(command)
+		#=========================update date 11/2/2018==============================
+		#check all the QC files
+		#Chech the plots
+		if(len([name for name in os.listdir(out_plot) if os.path.isfile(name)])==3):
+			summary_file.write('The number of Insertsize plots seems to be fine.\n')
+		else:
+			summary_file.write('The number of Insertsize plots is not correct.\n')
+		#Check the Breadth file
+		little_flag=False
+		for file in os.listdir(out_coverage):
+			breadth_file='metabams_Batch'+batch+'_Run'+run+'.table'
+			if file==breadth_file:
+				little_flag=True
+		if little_flag:
+			summary_file.write('The breadth file generated seems to be fine.\n')
+		else:
+			summary_file.write('The breadth file is not correctly generated.\n')
+		#Check the Signal to noise file
+		little_flag=False
+		for file in os.listdir(out_s2n):
+			breadth_file='Batch'+batch+'_Run'+run+'.signal2noise'
+			if file==breadth_file:
+				little_flag=True
+		if little_flag:
+			summary_file.write('The signal to noise file generated seems to be fine.\n')
+		else:
+			summary_file.write('The signal to noise file is not correctly generated.\n')
+		#Check the Summary file
+		little_flag=False
+		for file in os.listdir(out_summary):
+			breadth_file='Batch'+batch+'_Run'+run+'.dat'
+			if file==breadth_file:
+				little_flag=True
+		if little_flag:
+			summary_file.write('The summary file generated seems to be fine.\n')
+		else:
+			summary_file.write('The summary file is not correctly generated.\n')
+		summary_file.write('The pipeline has finished running.\n')
+		summary_file.write('Current time:')
+		summary_file.write(str(datetime.datetime.now()))
+		summary_file.write('\n')
+		summary_file.close()
+		#============================================================================
+
+
 
 	else:
 		print('Please specify at least the --core_info_file --seq_data --batch --run --conf')
