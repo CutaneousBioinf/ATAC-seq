@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-#Code contributed by Alex Tsoi and Yuhua Zhang
+#Code contributed by Yuhua Zhang
 
 import pandas as pd
 import os
@@ -42,7 +42,8 @@ def fastq_index(pathway,index_pathway,batch,run):
 			if(re.search('R2_\d*\d.trimmed.fastq.gz',file)):
 				file2.append(file)
 		lanes.append(lane)
-	
+	file1.sort()
+	file2.sort()
 	for i in range(len(SampleID)):
 		MERGE_NAME=pd.DataFrame(columns=['MERGE_NAME'])
 		FASTQ1=pd.DataFrame(columns=['FASTQ1'])
